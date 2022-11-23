@@ -3,8 +3,8 @@ import './Banner.css'
 
 const Banner = () => {
     return (
-        <div>
-<div className='lg:mx-20 rounded sm:mt-8 lg:mt-12'>
+        <div className='mb-0'>
+<div className='lg:mx-20 rounded sm:mt-8 lg:mt-12 mb-0'>
 <img className='rounded' src="https://assets.website-files.com/5e4ef646507f139934406108/5e52e6e3eba25921383ee9f4_better_book_sales_strategy_blog.jpeg" alt="" />
 </div>
 <div className='text-left text-white text-6xl font-bold banner-texts w-1/2'>
