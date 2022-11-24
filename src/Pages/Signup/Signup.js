@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../UserContext/UserContext';
@@ -10,7 +10,10 @@ const Signup = () => {
     const {register, handleSubmit, formState: { errors }} = useForm();
     const {signUp, updateUser, signInWithGoogle} = useContext(AuthContext)
     const [error, setError] = useState(' ')
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     const handleSignUp = data => {
         signUp(data.email, data.password, data.type)
@@ -42,6 +45,7 @@ const Signup = () => {
         'success'
       )
         setError( ' ')
+        navigate(from, { replace: true });
         saveUserInDatabase(user.displayName, user.email, `Buyer` )
     }).catch((error) => {
       const errorMessage = error.message;
@@ -67,7 +71,7 @@ const Signup = () => {
             'success'
           )
           setError(' ');
-          navigate('/')
+          navigate(from, { replace: true });
       })
   }
 

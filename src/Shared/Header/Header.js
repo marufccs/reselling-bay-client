@@ -26,8 +26,18 @@ const Header = () => {
       <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
         <li><Link to='/'>Home</Link></li>
         <li><Link>About Us</Link></li>
-        <li><Link>Blog</Link></li>
-        <li><Link to='/login'>Log In</Link></li>
+        <li><Link to='/blog'>Blog</Link></li>
+        {
+        user && user.uid?
+         <>
+         <li><Link onClick={handleLogOut}>Log Out</Link></li>
+         <li><Link to='/dashboard'>Dashboard</Link></li>
+         </> 
+         :
+          <>
+         <li><Link to='/login'>Log In</Link></li>
+         </>
+      }
       </ul>
     </div>
     <Link className="btn btn-ghost normal-case text-xl" to='/'> <span className='text-2xl'>Reselling </span> <span className='text-2xl bg-accent mx-2 text-white px-2 rounded'> Bay</span></Link>
@@ -36,11 +46,12 @@ const Header = () => {
     <ul className="menu menu-horizontal p-0">
       <li><Link to='/'>Home</Link></li>
       <li><Link>About Us</Link></li>
-      <li><Link>Blog</Link></li>
+      <li><Link to='/blog'>Blog</Link></li>
       {
         user && user.uid?
          <>
          <li><Link onClick={handleLogOut}>Log Out</Link></li>
+         <li><Link to='/dashboard'>Dashboard</Link></li>
          </> 
          :
           <>

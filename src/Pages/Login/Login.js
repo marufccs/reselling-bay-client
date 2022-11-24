@@ -44,7 +44,7 @@ const Login = () => {
         )
         saveUserInDatabase(user.displayName, user.email, `Buyer` )
           setError( ' ')
-          navigate('/')
+          navigate(from, { replace: true });
           
       }).catch((error) => {
         const errorMessage = error.message;
