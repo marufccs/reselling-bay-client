@@ -4,7 +4,6 @@ import { FaGoogle } from "react-icons/fa";
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../UserContext/UserContext';
 import Swal from 'sweetalert2';
-import { GoogleAuthProvider } from 'firebase/auth';
 
 const Signup = () => {
 
@@ -28,9 +27,7 @@ const Signup = () => {
               .catch(err => console.log(err));
           })
           .catch((error) => {
-            const errorCode = error.code;
             const errorMessage = error.message;
-            console.log( errorMessage)
             setError(errorMessage);
           });
     }
@@ -39,15 +36,13 @@ const Signup = () => {
      signInWithGoogle()
     .then((result) => {
       const user = result.user;
-      console.log(user);
       Swal.fire(
         'Congrats!',
         "You've been signed up successfully with Google!",
         'success'
       )
         setError( ' ')
-        navigate('/')
-        
+        saveUserInDatabase(user.displayName, user.email, `Buyer` )
     }).catch((error) => {
       const errorMessage = error.message;
       setError(errorMessage)

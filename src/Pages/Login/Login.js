@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaGoogle } from "react-icons/fa";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../UserContext/UserContext';
 
@@ -11,6 +11,9 @@ const Login = () => {
   const {signIn, signInWithGoogle} = useContext(AuthContext);
   const [error, setError] = useState(' ');
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || '/';
 
     const handleLogIn = data => {
       signIn(data.email, data.password)
@@ -21,9 +24,8 @@ const Login = () => {
           "You've been logged in successfully!",
           'success'
         )
-        console.log(user);
         setError(' ');
-        navigate('/ ')
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -35,12 +37,12 @@ const Login = () => {
       signInWithGoogle()
       .then((result) => {
         const user = result.user;
-        console.log(user);
         Swal.fire(
           'Congrats!',
           "You've been signed in successfully with Google!",
           'success'
         )
+        saveUserInDatabase(user.displayName, user.email, `Buyer` )
           setError( ' ')
           navigate('/')
           
@@ -49,6 +51,21 @@ const Login = () => {
         setError(errorMessage)
       });
     }
+
+    const saveUserInDatabase = (name, email, type) =>{
+      const user ={name, email, type};
+      fetch('http://localhost:5000/users', {
+          method: 'POST',
+          headers: {
+              'content-type': 'application/json'
+          },
+          body: JSON.stringify(user)
+      })
+      .then(res => res.json())
+      .then(data =>{
+
+      })
+  }
     return (
         <div>
               <form onSubmit={handleSubmit(handleLogIn)} className="hero min-h-screen ">
