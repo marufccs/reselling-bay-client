@@ -4,7 +4,7 @@ import { AuthContext } from '../../UserContext/UserContext';
 import Loader from '../Loader/Loader';
 
 const Modal = ({bookData, setBookData}) => {
-    const {title, resalePrice} = bookData
+    const {title, resalePrice, img} = bookData
     const {user, loading} = useContext(AuthContext)
     if(loading){
         return <Loader/>
@@ -26,6 +26,7 @@ const Modal = ({bookData, setBookData}) => {
             bookPrice,
             userPhoneNumber,
             meetingLocation,
+            img
         }
         fetch('http://localhost:5000/bookings', {
             method: 'POST',
@@ -66,8 +67,9 @@ const Modal = ({bookData, setBookData}) => {
                     <form onSubmit={handleBooking} className='grid grid-cols-1 gap-3 mt-10'>
                         <input name="name" type="text" disabled value={user?.displayName} placeholder="Your Name" className="input w-full input-bordered" />
                         <input name="email" type="email" disabled value={user?.email}placeholder="Email Address" className="input w-full input-bordered" />
-                        <input name="itemName" type="text" disabled value={title}placeholder="Email Address" className="input w-full input-bordered" />
-                        <input name="price" type="text" disabled value={`€`+ resalePrice}placeholder="Email Address" className="input w-full input-bordered" />
+                        <input name="itemName" type="text" disabled value={title} className="input w-full input-bordered" />
+                        <input name="img" type="text" disabled value={img} className="input w-full input-bordered" />
+                        <input name="price" type="text" disabled value={`€`+ resalePrice} className="input w-full input-bordered" />
                         <input name="phone" type="text" placeholder="Phone Number" className="input w-full input-bordered" required/>
                         <input name="location" type="text" placeholder="Meeting Location" className="input w-full input-bordered" required/>
                         <br />

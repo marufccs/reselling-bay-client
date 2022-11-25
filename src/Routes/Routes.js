@@ -7,13 +7,16 @@ import SelectCategories from "../Pages/Dashboard/AddProduct/SelectCategories";
 import AllBuyers from "../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../Pages/Dashboard/Dashboard/AllSellers/AllSellers";
 import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
+import MyOrders from "../Pages/Dashboard/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
+import MyWishList from "../Pages/Dashboard/MyWishList/MyWishList";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Products from "../Pages/Products/Products";
 import Signup from "../Pages/Signup/Signup";
 import AdminRoute from "./AdminRoute/AdminRoute";
+import BuyerRoute from "./BuyerRoute/BuyerRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import SellerRoute from "./SellerRoute/SellerRoute";
 
@@ -82,6 +85,17 @@ export const router = createBrowserRouter([
             path: '/dashboard/allbuyers',
             element: <AdminRoute> <AllBuyers/> </AdminRoute>
         },
+        {
+            path: '/dashboard/myorders/:email',
+            loader: ({params}) => fetch(`http://localhost:5000/bookings?userEmail=${params.email}`),
+            element:<BuyerRoute> <MyOrders/> </BuyerRoute>
+        },
+        {
+            path: '/dashboard/mywishlist/:email',
+            loader: ({params}) => fetch(`http://localhost:5000/wishlist?email=${params.email}`),
+            element:<BuyerRoute> <MyWishList/>/ </BuyerRoute>
+        },
+
       ]
     }
 ])
