@@ -2,13 +2,16 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../Main/DashboardLayout";
 import Main from "../Main/Main";
 import Blog from "../Pages/Blog/Blog";
-import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
+import AddProductMystery from "../Pages/Dashboard/AddProduct/AddProductMystery";
+import AddProducts from "../Pages/Dashboard/AddProduct/AddProducts";
+import AddProductShortStories from "../Pages/Dashboard/AddProduct/AddProductShortStories";
 import SelectCategories from "../Pages/Dashboard/AddProduct/SelectCategories";
 import AllBuyers from "../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../Pages/Dashboard/Dashboard/AllSellers/AllSellers";
 import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
 import MyOrders from "../Pages/Dashboard/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
+import SelectCategoriesOfMyProducts from "../Pages/Dashboard/MyProducts/SelectCategoriesOfMyProducts";
 import MyWishList from "../Pages/Dashboard/MyWishList/MyWishList";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
@@ -41,7 +44,7 @@ export const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 loader: ({params}) => 
-                    fetch (`http://localhost:5000/category/${params.id}`),
+                    fetch (`http://localhost:5000/allBooks?category_id=${params.id}`),
                 element: <PrivateRoute> <Products/></PrivateRoute>
             },
             {
@@ -63,15 +66,15 @@ export const router = createBrowserRouter([
             path: '/dashboard',
             element: <Dashboard/>
         },
+        // {
+        //     path: '/dashboard/selectcategory',
+        //     element: <SellerRoute> <SelectCategories/> </SellerRoute>
+        // },
         {
-            path: '/dashboard/selectcategory',
-            element: <SellerRoute> <SelectCategories/> </SellerRoute>
-        },
-        {
-            path: '/dashboard/addproduct/:id',
+            path: '/dashboard/addproduct',
             loader: ({params}) => 
-            fetch (`http://localhost:5000/category/${params.id}`),
-            element: <SellerRoute> <AddProduct/> </SellerRoute>
+            fetch (`http://localhost:5000/categories`),
+            element: <SellerRoute> <AddProducts/> </SellerRoute>
         },
         {
             path: '/dashboard/myproducts',

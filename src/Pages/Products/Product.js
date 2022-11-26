@@ -1,11 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { HiCheck } from "react-icons/hi";
 import Swal from 'sweetalert2';
 import Loader from '../../Shared/Loader/Loader';
 import { AuthContext } from '../../UserContext/UserContext';
 
-const Product = ({book, setBookData}) => {
-    const { img, title, location, originalPrice, resalePrice, yearsOfUse, time, sellerName} = book;
+const Product = ({book, setBookData, bookData}) => {
+    const { img, title, location, originalPrice, resalePrice, yearsOfUse, time, sellerName, productCondition, productDescription} = book;
+ 
+    const [categoryBasedProduct, setCategoryBasedProduct] = useState([])
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/categories`)
+        .then(res => res.json())
+        .then(data => {
+            setCategoryBasedProduct(data);
+        })
+    },[])
+  
 
     const {user,loading} = useContext(AuthContext);
     if(loading){
@@ -57,6 +68,8 @@ const Product = ({book, setBookData}) => {
     <p>Original Price: €{originalPrice}</p>
     <p>Resale Price: €{resalePrice}</p>
     <p>Years of Use: {yearsOfUse}</p>
+    <p>Condition of the Product: {productCondition}</p>
+    <p>Description: {productDescription}</p>
     <p>Post time: {time}</p>
     <div className='flex '>
     <p>Seller Name: {sellerName}</p>
@@ -64,7 +77,7 @@ const Product = ({book, setBookData}) => {
     </div>
     </div>
     <div className="card-actions justify-between">
-      <button onClick={() => handleAddingToWishList(img, title, resalePrice, user.email)} className='btn btn-info text-white'>Add To WishList</button>
+    <button onClick={() => handleAddingToWishList(img, title, resalePrice, user.email)} className='btn btn-info text-white'>Add To WishList</button>
       <label htmlFor="booking-modal" className="btn btn-accent text-white"onClick={() => setBookData(book)}>Book Now</label>
     </div>
   </div>

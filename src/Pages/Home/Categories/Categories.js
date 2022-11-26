@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Loader from '../../../Shared/Loader/Loader';
 import Category from './Category/Category';

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
 const Category = ({category}) => {
-    const {_id, img, category_name} = category;
+  const {_id, img, category_name} = category;
+
     return (
         <div className="card card-compact w-96 bg-base-100 shadow-xl">
   <figure><img className='h-60 w-full' src={img} alt="" /></figure>
