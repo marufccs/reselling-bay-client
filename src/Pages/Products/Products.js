@@ -13,21 +13,6 @@ const Products = () => {
 
     const usedBooks = useLoaderData();
     console.log(usedBooks);
-
-    // const { data: products = [], isLoading} = useQuery({
-    //     queryKey: ['products'],
-    //     queryFn: async () => {
-    //         const res = await fetch(`http://localhost:5000/allBooks?category_id=${usedBooks._id}`);
-    //         const data = await res.json();
-    //         return data
-    //     }
-    // })
-    // console.log(products);
-
-    // if(isLoading){
-    //     return <Loader/>
-    // }
-
   
     if(loading){
         return <Loader/>

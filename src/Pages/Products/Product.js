@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { HiCheck } from "react-icons/hi";
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Loader from '../../Shared/Loader/Loader';
 import { AuthContext } from '../../UserContext/UserContext';
 
 const Product = ({book, setBookData, bookData}) => {
     const { img, title, location, originalPrice, resalePrice, yearsOfUse, time, sellerName, productCondition, productDescription} = book;
+    const navigate = useNavigate();
  
     const [categoryBasedProduct, setCategoryBasedProduct] = useState([])
 
@@ -47,6 +49,7 @@ const Product = ({book, setBookData, bookData}) => {
                         "You added this book to your wishlist!",
                         'success'
                       )
+                    navigate(`/dashboard/mywishlist/${email}`)
                 }
                 else{
                     Swal.fire({

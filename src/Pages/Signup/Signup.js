@@ -4,16 +4,23 @@ import { FaGoogle } from "react-icons/fa";
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../UserContext/UserContext';
 import Swal from 'sweetalert2';
+import useToken from '../../hooks/useToken';
 
 const Signup = () => {
 
     const {register, handleSubmit, formState: { errors }} = useForm();
     const {signUp, updateUser, signInWithGoogle} = useContext(AuthContext)
     const [error, setError] = useState(' ')
+    const [signedUpUserEmail, setSignedUpUserEmail] = useState('');
+    const [token] = useToken(signedUpUserEmail);
     const navigate = useNavigate();
     const location = useLocation();
 
     const from = location.state?.from?.pathname || '/';
+
+    if(token){
+      navigate(from, { replace: true });
+    }
 
     const handleSignUp = data => {
         signUp(data.email, data.password, data.type)
@@ -64,16 +71,17 @@ const Signup = () => {
       })
       .then(res => res.json())
       .then(data =>{
-          console.log(data);
+         setSignedUpUserEmail(email)
           Swal.fire(
             'Congrats!',
             "You've been signed up successfully!",
             'success'
           )
           setError(' ');
-          navigate(from, { replace: true });
+          
       })
   }
+
 
 
     return (

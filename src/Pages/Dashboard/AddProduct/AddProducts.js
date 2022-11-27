@@ -1,13 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useLoaderData } from 'react-router-dom';
+import { Navigate, useLoaderData, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import Loader from '../../../Shared/Loader/Loader';
 import { AuthContext } from '../../../UserContext/UserContext';
 
 const AddProducts = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/categories')
@@ -91,7 +93,13 @@ const AddProducts = () => {
               })
               .then( res => res.json())
               .then(result => {
-                console.log(result);
+                Swal.fire(
+                    'Awesome!',
+                    'Your product has been added successfully!',
+                    'success'
+                  )
+                  navigate('/dashboard/myproducts')
+
               })
         
             }

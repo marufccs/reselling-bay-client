@@ -21,7 +21,7 @@ const MyProducts = () => {
         return <Loader/>
     }
     return (
-        <div>
+        <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lg:ml-48 sm:ml-20 mt-20'>
             {
                 myProducts.map(myProduct => <MyProduct key={myProduct._id} myProduct={myProduct}></MyProduct> )
             }

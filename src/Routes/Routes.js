@@ -90,7 +90,11 @@ export const router = createBrowserRouter([
         },
         {
             path: '/dashboard/myorders/:email',
-            loader: ({params}) => fetch(`http://localhost:5000/bookings?userEmail=${params.email}`),
+            loader: ({params}) => fetch(`http://localhost:5000/bookings?userEmail=${params.email}`, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            }),
             element:<BuyerRoute> <MyOrders/> </BuyerRoute>
         },
         {

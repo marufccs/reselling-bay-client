@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../UserContext/UserContext';
 import Loader from '../Loader/Loader';
 
 const Modal = ({bookData, setBookData}) => {
-    const {title, resalePrice, img} = bookData
+    const {title, resalePrice, img} = bookData;
+    const navigate = useNavigate();
     const {user, loading} = useContext(AuthContext)
     if(loading){
         return <Loader/>
@@ -45,6 +47,7 @@ const Modal = ({bookData, setBookData}) => {
                         "Your book has been booked successfully!",
                         'success'
                       )
+                    navigate(`/dashboard/myorders/${userEmail}`)
                 }
                 else{
                     Swal.fire({

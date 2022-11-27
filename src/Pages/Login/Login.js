@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import useToken from '../../hooks/useToken';
 import { AuthContext } from '../../UserContext/UserContext';
 
 const Login = () => {
@@ -10,10 +11,15 @@ const Login = () => {
   const {register, handleSubmit, formState: { errors }} = useForm();
   const {signIn, signInWithGoogle} = useContext(AuthContext);
   const [error, setError] = useState(' ');
+  const [loggedInUser, setLoggedInUser] = useState('');
+  const [token] = useToken(loggedInUser);
   const navigate = useNavigate();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || '/';
+  if(token){
+    navigate(from, { replace: true });
+  }
 
     const handleLogIn = data => {
       signIn(data.email, data.password)
@@ -25,7 +31,7 @@ const Login = () => {
           'success'
         )
         setError(' ');
-        navigate(from, { replace: true });
+       setLoggedInUser(data.email);
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -42,7 +48,7 @@ const Login = () => {
           "You've been signed in successfully with Google!",
           'success'
         )
-        saveUserInDatabase(user.displayName, user.email, `Buyer` )
+        
           setError( ' ')
           navigate(from, { replace: true });
           
@@ -52,20 +58,7 @@ const Login = () => {
       });
     }
 
-    const saveUserInDatabase = (name, email, type) =>{
-      const user ={name, email, type};
-      fetch('http://localhost:5000/users', {
-          method: 'POST',
-          headers: {
-              'content-type': 'application/json'
-          },
-          body: JSON.stringify(user)
-      })
-      .then(res => res.json())
-      .then(data =>{
-
-      })
-  }
+   
     return (
         <div>
               <form onSubmit={handleSubmit(handleLogIn)} className="hero min-h-screen ">
