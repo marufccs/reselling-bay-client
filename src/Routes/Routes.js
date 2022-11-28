@@ -16,6 +16,7 @@ import MyWishList from "../Pages/Dashboard/MyWishList/MyWishList";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
+import Payment from "../Pages/Payment/Payment";
 import Products from "../Pages/Products/Products";
 import Signup from "../Pages/Signup/Signup";
 import AdminRoute from "./AdminRoute/AdminRoute";
@@ -101,6 +102,11 @@ export const router = createBrowserRouter([
             path: '/dashboard/mywishlist/:email',
             loader: ({params}) => fetch(`http://localhost:5000/wishlist?email=${params.email}`),
             element:<BuyerRoute> <MyWishList/>/ </BuyerRoute>
+        },
+        {
+            path: '/dashboard/payment/:id',
+            element: <BuyerRoute> <Payment/> </BuyerRoute>,
+            loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`)
         },
 
       ]
