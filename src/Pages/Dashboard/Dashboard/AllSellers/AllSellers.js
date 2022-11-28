@@ -9,7 +9,7 @@ const AllSellers = () => {
     const { data: sellers = [], isLoading, refetch} = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users?type=Seller`);
+            const res = await fetch(`https://used-products-resale-market-server-eight.vercel.app/users?type=Seller`);
             const data = await res.json();
             return data
         }
@@ -45,7 +45,7 @@ const [sellerList, setSellerList] = useState(sellers);
                 'Your file has been successfully deleted.',
                 'success'
               )
-              fetch(`http://localhost:5000/users/sellers/${id}`,{
+              fetch(`https://used-products-resale-market-server-eight.vercel.app/users/sellers/${id}`,{
                 method: 'DELETE'
             })
             .then(res => res.json())
@@ -70,7 +70,7 @@ const [sellerList, setSellerList] = useState(sellers);
     }
 
     const handleVerify = id => {
-        fetch(`http://localhost:5000/users/sellers/${id}`, {
+        fetch(`https://used-products-resale-market-server-eight.vercel.app/users/sellers/${id}`, {
             method: 'PUT'
         })
         .then(res => res.json())

@@ -30,7 +30,7 @@ const Modal = ({bookData, setBookData}) => {
             meetingLocation,
             img
         }
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://used-products-resale-market-server-eight.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -76,7 +76,7 @@ const Modal = ({bookData, setBookData}) => {
                         <input name="phone" type="text" placeholder="Phone Number" className="input w-full input-bordered" required/>
                         <input name="location" type="text" placeholder="Meeting Location" className="input w-full input-bordered" required/>
                         <br />
-                        <input className='btn btn-accent w-full' type="submit" value="Submit" />
+                        <input className='btn btn-accent w-full text-white' type="submit" value="Submit" />
                     </form>
                 </div>
             </div>

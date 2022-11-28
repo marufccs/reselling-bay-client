@@ -13,7 +13,7 @@ const AdvertisedProduct = ({books, setBookData}) => {
     const [categoryBasedProduct, setCategoryBasedProduct] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/categories`)
+        fetch(`https://used-products-resale-market-server-eight.vercel.app/categories`)
         .then(res => res.json())
         .then(data => {
             setCategoryBasedProduct(data);
@@ -34,7 +34,7 @@ const AdvertisedProduct = ({books, setBookData}) => {
           Price: price,
           email: email,
         }
-        fetch('http://localhost:5000/wishlist', {
+        fetch('https://used-products-resale-market-server-eight.vercel.app/wishlist', {
               method: 'POST',
               headers: {
                   'content-type': 'application/json'

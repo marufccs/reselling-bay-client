@@ -62,7 +62,7 @@ const Signup = () => {
 
     const saveUserInDatabase = (name, email, type) =>{
       const user ={name, email, type};
-      fetch('http://localhost:5000/users', {
+      fetch('https://used-products-resale-market-server-eight.vercel.app/users', {
           method: 'POST',
           headers: {
               'content-type': 'application/json'

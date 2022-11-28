@@ -10,7 +10,7 @@ const SelectCategories = () => {
     const { data: categories = [], isLoading} = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/categories`);
+            const res = await fetch(`https://used-products-resale-market-server-eight.vercel.app/categories`);
             const data = await res.json();
             return data
         }

@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 loader: ({params}) => 
-                    fetch (`http://localhost:5000/allBooks?category_id=${params.id}`),
+                    fetch (`https://used-products-resale-market-server-eight.vercel.app/allBooks?category_id=${params.id}`),
                 element: <PrivateRoute> <Products/></PrivateRoute>
             },
             {
@@ -74,7 +74,7 @@ export const router = createBrowserRouter([
         {
             path: '/dashboard/addproduct',
             loader: ({params}) => 
-            fetch (`http://localhost:5000/categories`),
+            fetch (`https://used-products-resale-market-server-eight.vercel.app/categories`),
             element: <SellerRoute> <AddProducts/> </SellerRoute>
         },
         {
@@ -91,7 +91,7 @@ export const router = createBrowserRouter([
         },
         {
             path: '/dashboard/myorders/:email',
-            loader: ({params}) => fetch(`http://localhost:5000/bookings?userEmail=${params.email}`, {
+            loader: ({params}) => fetch(`https://used-products-resale-market-server-eight.vercel.app/bookings?userEmail=${params.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -100,13 +100,13 @@ export const router = createBrowserRouter([
         },
         {
             path: '/dashboard/mywishlist/:email',
-            loader: ({params}) => fetch(`http://localhost:5000/wishlist?email=${params.email}`),
+            loader: ({params}) => fetch(`https://used-products-resale-market-server-eight.vercel.app/wishlist?email=${params.email}`),
             element:<BuyerRoute> <MyWishList/>/ </BuyerRoute>
         },
         {
             path: '/dashboard/payment/:id',
             element: <BuyerRoute> <Payment/> </BuyerRoute>,
-            loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`)
+            loader: ({params}) => fetch(`https://used-products-resale-market-server-eight.vercel.app/bookings/${params.id}`)
         },
 
       ]

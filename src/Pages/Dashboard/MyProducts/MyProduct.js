@@ -9,7 +9,7 @@ const MyProduct = ({myProduct}) => {
 
     const handleAdvertise = () => {
         const product = myProduct;
-        fetch(`http://localhost:5000/advertisedbooks`, {
+        fetch(`https://used-products-resale-market-server-eight.vercel.app/advertisedbooks`, {
                 method: 'POST',
                 headers: {
                   'content-type' : 'application/json',

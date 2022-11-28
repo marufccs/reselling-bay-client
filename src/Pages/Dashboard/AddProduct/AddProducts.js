@@ -12,7 +12,7 @@ const AddProducts = () => {
     const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/categories')
+        fetch('https://used-products-resale-market-server-eight.vercel.app/categories')
         .then(res => res.json())
         .then(data => {
             setCategories(data);
@@ -31,7 +31,7 @@ const AddProducts = () => {
     const { data: theSeller = [], isLoading} = useQuery({
         queryKey: ['theSeller'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users?email=${user.email}`);
+            const res = await fetch(`https://used-products-resale-market-server-eight.vercel.app/users?email=${user.email}`);
             const data = await res.json();
             return data
         }
@@ -84,7 +84,7 @@ const AddProducts = () => {
                 category_id: category_id
             }
             console.log(product);
-            fetch(`http://localhost:5000/allbooks`, {
+            fetch(`https://used-products-resale-market-server-eight.vercel.app/allbooks`, {
                 method: 'POST',
                 headers: {
                   'content-type' : 'application/json',
