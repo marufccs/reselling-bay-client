@@ -145,7 +145,7 @@ const AddProducts = () => {
         <textarea {...register("description", { required: "description is required" })} className="textarea textarea-bordered sm:w-3/4 lg:w-1/2" placeholder="Product Description"></textarea>
 
         <br />
-            <input className='btn btn-accent sm:w-3/4 lg:w-1/2' type="submit" value="Submit" />
+            <input className='btn btn-accent text-white sm:w-3/4 lg:w-1/2' type="submit" value="Submit" />
         </form>
             </div>
         </div>
